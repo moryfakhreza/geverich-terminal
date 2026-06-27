@@ -22,13 +22,49 @@
     <a href="#">Analytics</a>
     <a href="#">Calculator</a>
 </nav>
-
 <section class="ticker">
-    Live Market Ticker
+
+    <div class="ticker-track" id="marketTicker">
+
+        Loading Market...
+
+    </div>
+
 </section>
 
-<section class="stats">
-    Statistics
+
+<section class="stats-grid">
+
+    <div class="stat-card">
+        <div class="stat-title">P&L Today</div>
+        <div class="stat-value profit">+$0.00</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-title">Trades</div>
+        <div class="stat-value">0 / 3</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-title">Win Rate</div>
+        <div class="stat-value">0%</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-title">Balance</div>
+        <div class="stat-value">$0.00</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-title">Average RR</div>
+        <div class="stat-value">1 : 0</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-title">Daily Target</div>
+        <div class="stat-value">0%</div>
+    </div>
+
 </section>
 
 <main class="dashboard">
@@ -39,9 +75,11 @@
             LIVE CHART
         </div>
 
-        <div class="panel-content">
-            Chart Area
-        </div>
+<div class="panel-content chart-body">
+
+    <div id="tv_chart"></div>
+
+</div>
 
     </section>
 
