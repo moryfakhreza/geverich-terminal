@@ -1,110 +1,72 @@
 <?php require_once 'includes/header.php'; ?>
 
 <header class="topbar">
-    <div class="logo">
-        GOLD TERMINAL
-    </div>
-
-    <div class="clock">
-        00:00 WIB
-    </div>
+    <div class="logo">GEVERICH TERMINAL</div>
+    <div id="clock">00:00 WIB</div>
 </header>
 
 <nav class="navbar">
-
     <a href="#">Dashboard</a>
-
     <a href="#">Journal</a>
-
     <a href="#">Analytics</a>
-
     <a href="#">Calculator</a>
-
 </nav>
 
 <section class="ticker">
-
-    Market Ticker
-
+    Live Market Ticker
 </section>
 
 <section class="stats">
-
     Statistics
-
 </section>
+
 <main class="dashboard">
 
-    <section class="chart-area">
+    <section class="chart-card">
 
-        <div class="panel-header">
+        <div class="panel-title">
             LIVE CHART
         </div>
 
-        <div class="panel-body">
-            TradingView Chart
+        <div class="panel-content">
+            Chart Area
         </div>
 
     </section>
 
     <aside class="sidebar">
 
-        <section class="panel">
-
-            <div class="panel-header">
-                Sessions
-            </div>
-
-            <div class="panel-body">
-                Sessions Panel
-            </div>
-
+        <section class="card">
+            <div class="panel-title">Sessions</div>
+            <div class="panel-content">Sessions</div>
         </section>
 
-        <section class="panel">
-
-            <div class="panel-header">
-                Risk Calculator
-            </div>
-
-            <div class="panel-body">
-                Calculator Panel
-            </div>
-
+        <section class="card">
+            <div class="panel-title">Risk Calculator</div>
+            <div class="panel-content">Calculator</div>
         </section>
 
-        <section class="panel">
-
-            <div class="panel-header">
-                Checklist
-            </div>
-
-            <div class="panel-body">
-                Checklist Panel
-            </div>
-
+        <section class="card">
+            <div class="panel-title">Checklist</div>
+            <div class="panel-content">Checklist</div>
         </section>
 
     </aside>
 
 </main>
 
-<section class="journal">
-
-    Trade Journal
-
+<section class="journal card">
+    <div class="panel-title">Journal Preview</div>
+    <div class="panel-content">Trade Journal</div>
 </section>
 
-<section class="analytics">
-
-    Analytics
-
+<section class="analytics card">
+    <div class="panel-title">Analytics</div>
+    <div class="panel-content">Analytics</div>
 </section>
 
 <footer class="statusbar">
-
     Ready
-
 </footer>
 
 <?php require_once 'includes/footer.php'; ?>
