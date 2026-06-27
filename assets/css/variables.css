@@ -1,0 +1,39 @@
+:root{
+
+    /* ========= COLORS ========= */
+
+    --bg-main:#0D1117;
+    --bg-panel:#161B22;
+    --bg-card:#1C2128;
+
+    --border:#30363D;
+
+    --text:#F0F6FC;
+    --text-muted:#8B949E;
+
+    --gold:#D4AF37;
+    --gold-hover:#F4C542;
+
+    --green:#2ECC71;
+    --red:#E74C3C;
+    --blue:#3B82F6;
+    --orange:#F39C12;
+
+    /* ========= FONT ========= */
+
+    --font-main:Inter,Arial,sans-serif;
+    --font-mono:Consolas,monospace;
+
+    /* ========= SIZE ========= */
+
+    --topbar-height:50px;
+    --navbar-height:40px;
+    --ticker-height:40px;
+    --status-height:28px;
+
+    --radius:10px;
+
+    --shadow:
+        0 2px 8px rgba(0,0,0,.25);
+
+}
