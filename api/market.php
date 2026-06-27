@@ -1,39 +1,46 @@
 <?php
 
-header("Content-Type: application/json");
+require_once "../includes/config.php";
 
-$data = [
+function fetchPrice($symbol) {
+    $url = "https://api.twelvedata.com/price?symbol=$symbol&apikey=" . TWELVE_API_KEY;
+    $res = @file_get_contents($url);
+    $data = json_decode($res, true);
 
-    "gold"=>[
-        "symbol"=>"XAU/USD",
-        "price"=>"3352.45",
-        "change"=>0.37
+    return isset($data["price"]) ? (float)$data["price"] : 0;
+}
+
+function fakeChange() {
+    return rand(-30, 30) / 10;
+}
+
+$gold = fetchPrice("XAU/USD");
+$dxy = fetchPrice("DXY");
+$usdjpy = fetchPrice("USD/JPY");
+$us10y = fetchPrice("US10Y");
+
+header('Content-Type: application/json');
+
+echo json_encode([
+    "gold" => [
+        "symbol" => "XAU/USD",
+        "price" => $gold,
+        "change" => fakeChange()
     ],
-
-    "dxy"=>[
-        "symbol"=>"DXY",
-        "price"=>"97.23",
-        "change"=>-0.12
+    "dxy" => [
+        "symbol" => "DXY",
+        "price" => $dxy,
+        "change" => fakeChange()
     ],
-
-    "us10y"=>[
-        "symbol"=>"US10Y",
-        "price"=>"4.32%",
-        "change"=>0.05
+    "usdjpy" => [
+        "symbol" => "USD/JPY",
+        "price" => $usdjpy,
+        "change" => fakeChange()
     ],
-
-    "usdjpy"=>[
-        "symbol"=>"USD/JPY",
-        "price"=>"146.23",
-        "change"=>-0.18
+    "us10y" => [
+        "symbol" => "US10Y",
+        "price" => $us10y,
+        "change" => fakeChange()
     ],
-
-    "news"=>[
-        "impact"=>"HIGH IMPACT",
-        "title"=>"US Non-Farm Payrolls",
-        "time"=>"20:30 WIB"
-    ]
-
-];
-
-echo json_encode($data);
+    "timestamp" => time()
+]);

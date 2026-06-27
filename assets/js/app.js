@@ -32,68 +32,49 @@ updateClock();
 
 setInterval(updateClock,1000);
 
-async function loadMarket(){
+async function loadMarket() {
+  try {
+    const res = await fetch("api/market.php");
+    const data = await res.json();
 
-    try{
+    const gold = data.gold;
+    const dxy = data.dxy;
+    const usdjpy = data.usdjpy;
+    const us10y = data.us10y;
 
-        const res = await fetch("api/market.php");
+    document.getElementById("marketTicker").innerHTML = `
+      🟡 ${gold.symbol} <strong>${gold.price}</strong> 
+      <span class="${gold.change >= 0 ? 'up' : 'down'}">
+        ${gold.change >= 0 ? '▲' : '▼'} ${Math.abs(gold.change)}%
+      </span>
 
-        const data = await res.json();
+      &nbsp;&nbsp; | &nbsp;&nbsp;
 
-        document.getElementById("marketTicker").innerHTML = `
+      🇺🇸 ${dxy.symbol} <strong>${dxy.price}</strong> 
+      <span class="${dxy.change >= 0 ? 'up' : 'down'}">
+        ${dxy.change >= 0 ? '▲' : '▼'} ${Math.abs(dxy.change)}%
+      </span>
 
-🟡 <strong>${data.gold.symbol}</strong>
-${data.gold.price}
-<span class="${data.gold.change>=0?'up':'down'}">
-${data.gold.change>=0?'▲':'▼'}
-${Math.abs(data.gold.change)}%
-</span>
+      &nbsp;&nbsp; | &nbsp;&nbsp;
 
-&nbsp;&nbsp;&nbsp;&nbsp;
+      💴 ${usdjpy.symbol} <strong>${usdjpy.price}</strong> 
+      <span class="${usdjpy.change >= 0 ? 'up' : 'down'}">
+        ${usdjpy.change >= 0 ? '▲' : '▼'} ${Math.abs(usdjpy.change)}%
+      </span>
 
-🇺🇸 <strong>${data.dxy.symbol}</strong>
-${data.dxy.price}
-<span class="${data.dxy.change>=0?'up':'down'}">
-${data.dxy.change>=0?'▲':'▼'}
-${Math.abs(data.dxy.change)}%
-</span>
+      &nbsp;&nbsp; | &nbsp;&nbsp;
 
-&nbsp;&nbsp;&nbsp;&nbsp;
+      📈 ${us10y.symbol} <strong>${us10y.price}</strong> 
+      <span class="${us10y.change >= 0 ? 'up' : 'down'}">
+        ${us10y.change >= 0 ? '▲' : '▼'} ${Math.abs(us10y.change)}%
+      </span>
+    `;
 
-📈 <strong>${data.us10y.symbol}</strong>
-${data.us10y.price}
-<span class="${data.us10y.change>=0?'up':'down'}">
-${data.us10y.change>=0?'▲':'▼'}
-${Math.abs(data.us10y.change)}%
-</span>
-
-&nbsp;&nbsp;&nbsp;&nbsp;
-
-💴 <strong>${data.usdjpy.symbol}</strong>
-${data.usdjpy.price}
-<span class="${data.usdjpy.change>=0?'up':'down'}">
-${data.usdjpy.change>=0?'▲':'▼'}
-${Math.abs(data.usdjpy.change)}%
-</span>
-
-&nbsp;&nbsp;&nbsp;&nbsp;
-
-🔴 <span class="news-high">
-${data.news.title}
-(${data.news.time})
-</span>
-
-`;
-
-    }catch(e){
-
-        document.getElementById("marketTicker").innerHTML =
-        "❌ Market data unavailable";
-
-    }
-
+  } catch (e) {
+    document.getElementById("marketTicker").innerHTML =
+      "❌ Market data unavailable";
+  }
 }
 
 loadMarket();
-
-setInterval(loadMarket,30000);
+setInterval(loadMarket, 5000);

@@ -93,6 +93,14 @@
 
 }
 
+.ticker-track span {
+    margin-right: 6px;
+}
+
+.ticker-track strong {
+    margin: 0 4px;
+}
+
 .ticker-track{
 
     display:inline-block;
