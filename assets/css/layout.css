@@ -20,3 +20,125 @@ body{
     font-family:var(--font-main);
 
 }
+
+.topbar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 20px;
+
+    height:55px;
+
+    background:var(--bg-panel);
+
+    border-bottom:1px solid var(--border);
+
+}
+
+.logo{
+
+    font-size:22px;
+
+    font-weight:700;
+
+    letter-spacing:2px;
+
+    color:var(--gold);
+
+}
+
+.topbar-right{
+
+    display:flex;
+
+    gap:15px;
+
+    align-items:center;
+
+    font-size:14px;
+
+    color:var(--text-muted);
+
+}
+
+#clock{
+
+    color:var(--gold);
+
+    font-weight:bold;
+
+}
+
+.navbar{
+
+    height:var(--navbar-height);
+
+    display:flex;
+
+    align-items:center;
+
+    gap:24px;
+
+    padding:0 20px;
+
+    background:var(--bg-card);
+
+    border-bottom:1px solid var(--border);
+
+}
+
+.navbar a{
+
+    color:var(--text);
+
+    text-decoration:none;
+
+}
+
+.dashboard{
+
+    margin:0 15px;
+
+    display:grid;
+
+    grid-template-columns:1fr 340px;
+
+    gap:20px;
+
+    align-items:start;
+
+}
+
+.sidebar{
+
+    .sidebar{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+}
+
+.statusbar{
+
+    height:var(--status-height);
+
+    display:flex;
+
+    align-items:center;
+
+    padding:0 15px;
+
+    background:var(--bg-panel);
+
+    border-top:1px solid var(--border);
+
+}

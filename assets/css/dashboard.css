@@ -1,80 +1,4 @@
-.topbar{
 
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    padding:0 20px;
-
-    height:55px;
-
-    background:var(--bg-panel);
-
-    border-bottom:1px solid var(--border);
-
-}
-
-.logo{
-
-    font-size:22px;
-
-    font-weight:700;
-
-    letter-spacing:2px;
-
-    color:var(--gold);
-
-}
-
-.topbar-right{
-
-    display:flex;
-
-    gap:15px;
-
-    align-items:center;
-
-    font-size:14px;
-
-    color:var(--text-muted);
-
-}
-
-#clock{
-
-    color:var(--gold);
-
-    font-weight:bold;
-
-}
-
-.navbar{
-
-    height:var(--navbar-height);
-
-    display:flex;
-
-    align-items:center;
-
-    gap:24px;
-
-    padding:0 20px;
-
-    background:var(--bg-card);
-
-    border-bottom:1px solid var(--border);
-
-}
-
-.navbar a{
-
-    color:var(--text);
-
-    text-decoration:none;
-
-}
 .market-ticker{
 
     height:46px;
@@ -150,20 +74,6 @@ color:#ff5252;
 
 }
 
-.dashboard{
-
-    margin:0 15px;
-
-    display:grid;
-
-    grid-template-columns:1fr 340px;
-
-    gap:20px;
-
-    align-items:start;
-
-}
-
 .chart-card{
     display:flex;
     flex-direction:column;
@@ -178,19 +88,7 @@ color:#ff5252;
     width:100%;
     height:100%;
 }
-.sidebar{
 
-    .sidebar{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:20px;
-
-}
-
-}
 
 .panel-title{
 

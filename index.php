@@ -1,4 +1,8 @@
-<?php require_once 'includes/header.php';
+<?php
+
+require_once 'includes/config.php';
+require_once 'includes/db.php';
+require_once 'includes/header.php';
 $db = getDB();
 
 $today = date('Y-m-d');
@@ -49,111 +53,9 @@ $winRate = $totalTrades
     <a href="#">Analytics</a>
     <a href="#">Calculator</a>
 </nav>
-<section class="market-ticker">
+<?php require 'components/market-ticker.php'; ?>
 
-<div class="tradingview-widget-container">
-
-<div class="tradingview-widget-container__widget"></div>
-
-<script type="text/javascript"
-src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js"
-async>
-{
-  "symbols": [
-    {
-      "proName": "OANDA:XAUUSD",
-      "title": "Gold"
-    },
-    {
-      "proName": "OANDA:XAGUSD",
-      "title": "Silver"
-    },
-    {
-      "proName": "CAPITALCOM:DXY",
-      "title": "Dollar Index"
-    },
-    {
-      "proName": "FX_IDC:USDJPY",
-      "title": "USD/JPY"
-    },
-    {
-      "proName": "TVC:USOIL",
-      "title": "WTI Oil"
-    }
-  ],
-  "showSymbolLogo": true,
-  "isTransparent": true,
-  "displayMode": "adaptive",
-  "colorTheme": "dark",
-  "locale": "en"
-}
-</script>
-
-</div>
-
-</section>
-
-<section class="stats-grid">
-
-<div class="dashboard-stats">
-
-    <div class="stat-card">
-
-        <div class="stat-title">
-            Balance
-        </div>
-
-        <div class="stat-value">
-            $1,000
-        </div>
-
-    </div>
-
-    <div class="stat-card">
-
-        <div class="stat-title">
-            P/L Today
-        </div>
-
-        <div class="stat-value <?= $pnl>=0?'profit':'loss' ?>">
-
-            <?= $pnl>=0?'+':'' ?>$<?= number_format($pnl,2) ?>
-
-        </div>
-
-    </div>
-
-    <div class="stat-card">
-
-        <div class="stat-title">
-            Win Rate
-        </div>
-
-        <div class="stat-value">
-
-            <?= $winRate ?>%
-
-        </div>
-
-    </div>
-
-    <div class="stat-card">
-
-        <div class="stat-title">
-            Trades
-        </div>
-
-        <div class="stat-value">
-
-            <?= $totalTrades ?>/3
-
-        </div>
-
-    </div>
-
-</div>
-
-</section>
+<?php require 'components/dashboard-stats.php'; ?>
 
 <main class="dashboard">
 
