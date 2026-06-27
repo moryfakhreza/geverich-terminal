@@ -1,4 +1,31 @@
-<?php require_once 'includes/header.php'; ?>
+<?php require_once 'includes/header.php';
+$db = getDB();
+
+$today = date('Y-m-d');
+
+$stmt = $db->prepare("
+SELECT
+COUNT(*) total,
+SUM(CASE WHEN hasil='WIN' THEN 1 ELSE 0 END) wins,
+SUM(CASE WHEN hasil='LOSS' THEN 1 ELSE 0 END) losses,
+COALESCE(SUM(profit_usd),0) pnl
+FROM trades
+WHERE DATE(tanggal)=?
+");
+
+$stmt->execute([$today]);
+
+$stats = $stmt->fetch(PDO::FETCH_ASSOC);
+
+$totalTrades = $stats['total'] ?? 0;
+$wins = $stats['wins'] ?? 0;
+$pnl = $stats['pnl'] ?? 0;
+
+$winRate = $totalTrades
+? round(($wins/$totalTrades)*100)
+:0;
+?>
+
 
 <header class="topbar">
 
@@ -22,48 +49,109 @@
     <a href="#">Analytics</a>
     <a href="#">Calculator</a>
 </nav>
-<section class="ticker">
+<section class="market-ticker">
 
-    <div class="ticker-track" id="marketTicker">
+<div class="tradingview-widget-container">
 
-        Loading Market...
+<div class="tradingview-widget-container__widget"></div>
 
-    </div>
+<script type="text/javascript"
+src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js"
+async>
+{
+  "symbols": [
+    {
+      "proName": "OANDA:XAUUSD",
+      "title": "Gold"
+    },
+    {
+      "proName": "OANDA:XAGUSD",
+      "title": "Silver"
+    },
+    {
+      "proName": "CAPITALCOM:DXY",
+      "title": "Dollar Index"
+    },
+    {
+      "proName": "FX_IDC:USDJPY",
+      "title": "USD/JPY"
+    },
+    {
+      "proName": "TVC:USOIL",
+      "title": "WTI Oil"
+    }
+  ],
+  "showSymbolLogo": true,
+  "isTransparent": true,
+  "displayMode": "adaptive",
+  "colorTheme": "dark",
+  "locale": "en"
+}
+</script>
+
+</div>
 
 </section>
 
-
 <section class="stats-grid">
 
+<div class="dashboard-stats">
+
     <div class="stat-card">
-        <div class="stat-title">P&L Today</div>
-        <div class="stat-value profit">+$0.00</div>
+
+        <div class="stat-title">
+            Balance
+        </div>
+
+        <div class="stat-value">
+            $1,000
+        </div>
+
     </div>
 
     <div class="stat-card">
-        <div class="stat-title">Trades</div>
-        <div class="stat-value">0 / 3</div>
+
+        <div class="stat-title">
+            P/L Today
+        </div>
+
+        <div class="stat-value <?= $pnl>=0?'profit':'loss' ?>">
+
+            <?= $pnl>=0?'+':'' ?>$<?= number_format($pnl,2) ?>
+
+        </div>
+
     </div>
 
     <div class="stat-card">
-        <div class="stat-title">Win Rate</div>
-        <div class="stat-value">0%</div>
+
+        <div class="stat-title">
+            Win Rate
+        </div>
+
+        <div class="stat-value">
+
+            <?= $winRate ?>%
+
+        </div>
+
     </div>
 
     <div class="stat-card">
-        <div class="stat-title">Balance</div>
-        <div class="stat-value">$0.00</div>
+
+        <div class="stat-title">
+            Trades
+        </div>
+
+        <div class="stat-value">
+
+            <?= $totalTrades ?>/3
+
+        </div>
+
     </div>
 
-    <div class="stat-card">
-        <div class="stat-title">Average RR</div>
-        <div class="stat-value">1 : 0</div>
-    </div>
-
-    <div class="stat-card">
-        <div class="stat-title">Daily Target</div>
-        <div class="stat-value">0%</div>
-    </div>
+</div>
 
 </section>
 

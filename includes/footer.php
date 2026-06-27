@@ -42,5 +42,25 @@ window.addEventListener("load",function(){
 });
 
 </script>
+
+<footer class="terminal-strip">
+
+    <div class="terminal-strip-inner">
+
+        <span>GEVERICH TERMINAL</span>
+
+        <span class="divider"></span>
+
+        <span>TRADE • PLAN • EXECUTE • REPEAT</span>
+
+        <span class="divider"></span>
+
+        <span>BUILD v1.0.0</span>
+
+    </div>
+
+</footer>
+
+<script src="assets/js/app.js"></script>
 </body>
 </html>
