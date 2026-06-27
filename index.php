@@ -1,8 +1,19 @@
 <?php require_once 'includes/header.php'; ?>
 
 <header class="topbar">
-    <div class="logo">GEVERICH TERMINAL</div>
-    <div id="clock">00:00 WIB</div>
+
+    <div class="logo">
+        GEVERICH TERMINAL
+    </div>
+
+    <div class="topbar-right">
+
+        <div id="todayDate"></div>
+
+        <div id="clock"></div>
+
+    </div>
+
 </header>
 
 <nav class="navbar">

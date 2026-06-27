@@ -1,7 +1,5 @@
 .topbar{
 
-    height:var(--topbar-height);
-
     display:flex;
 
     justify-content:space-between;
@@ -9,6 +7,8 @@
     align-items:center;
 
     padding:0 20px;
+
+    height:55px;
 
     background:var(--bg-panel);
 
@@ -18,11 +18,35 @@
 
 .logo{
 
+    font-size:22px;
+
     font-weight:700;
+
+    letter-spacing:2px;
 
     color:var(--gold);
 
-    letter-spacing:1px;
+}
+
+.topbar-right{
+
+    display:flex;
+
+    gap:15px;
+
+    align-items:center;
+
+    font-size:14px;
+
+    color:var(--text-muted);
+
+}
+
+#clock{
+
+    color:var(--gold);
+
+    font-weight:bold;
 
 }
 
