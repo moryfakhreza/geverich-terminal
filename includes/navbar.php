@@ -1,0 +1,28 @@
+<!-- TOP BAR -->
+<header class="topbar">
+
+    <div class="logo">
+        GEVERICH TERMINAL
+    </div>
+
+    <div class="topbar-right">
+
+        <div id="todayDate"></div>
+
+        <div id="clock"></div>
+
+    </div>
+
+</header>
+
+<nav class="navbar">
+
+<a href="?page=dashboard">Dashboard</a>
+
+<a href="?page=journal">Journal</a>
+
+<a href="?page=analytics">Analytics</a>
+
+<a href="?page=calculator">Calculator</a>
+
+</nav>

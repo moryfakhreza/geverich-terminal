@@ -78,3 +78,123 @@ async function loadMarket() {
 
 loadMarket();
 setInterval(loadMarket, 5000);
+
+function updateCountdown(){
+
+    const now=new Date();
+
+    const london=new Date();
+
+    london.setHours(14,0,0,0);
+
+    let diff=london-now;
+
+    if(diff<0){
+        diff+=24*60*60*1000;
+    }
+
+    const h=Math.floor(diff/3600000);
+
+    const m=Math.floor((diff%3600000)/60000);
+
+    const s=Math.floor((diff%60000)/1000);
+
+    const el=document.getElementById("countdown");
+
+    if(el){
+
+        el.innerHTML=
+
+        String(h).padStart(2,"0")+":"+
+
+        String(m).padStart(2,"0")+":"+
+
+        String(s).padStart(2,"0");
+
+    }
+
+}
+
+updateCountdown();
+
+setInterval(updateCountdown,1000);
+
+function riskCalculator(){
+
+    const balance=parseFloat(document.getElementById("balance").value)||0;
+
+    const risk=parseFloat(document.getElementById("risk").value)||0;
+
+    const entry=parseFloat(document.getElementById("entry").value)||0;
+
+    const sl=parseFloat(document.getElementById("sl").value)||0;
+
+    const tp=parseFloat(document.getElementById("tp").value)||0;
+
+    const riskMoney=balance*risk/100;
+
+    document.getElementById("riskAmount").textContent="$"+riskMoney.toFixed(2);
+
+    const stopDistance=Math.abs(entry-sl);
+
+    if(stopDistance<=0){
+
+        document.getElementById("lotSize").textContent="0.00";
+        document.getElementById("rr").textContent="-";
+        document.getElementById("profit").textContent="$0.00";
+        document.getElementById("loss").textContent="$0.00";
+
+        return;
+    }
+
+    const lot=riskMoney/(stopDistance*100);
+
+    document.getElementById("lotSize").textContent=lot.toFixed(2);
+
+    const reward=Math.abs(tp-entry);
+
+    const rr=reward/stopDistance;
+
+    document.getElementById("rr").textContent="1 : "+rr.toFixed(2);
+
+    document.getElementById("profit").textContent="$"+(riskMoney*rr).toFixed(2);
+
+    document.getElementById("loss").textContent="$"+riskMoney.toFixed(2);
+
+}
+
+const inputs=[
+    "balance",
+    "risk",
+    "entry",
+    "sl",
+    "tp"
+];
+
+inputs.forEach(id=>{
+
+    const el=document.getElementById(id);
+
+    if(el){
+
+        el.addEventListener("input",riskCalculator);
+
+    }
+
+});
+
+const riskButtons=document.querySelectorAll(".risk-btn");
+
+riskButtons.forEach(btn=>{
+
+    btn.addEventListener("click",()=>{
+
+        document.getElementById("risk").value=btn.dataset.risk;
+
+        riskCalculator();
+
+    });
+
+});
+
+riskCalculator();

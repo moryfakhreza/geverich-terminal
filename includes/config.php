@@ -1,3 +1,7 @@
 <?php
 
 define("DB_PATH", __DIR__ . "/../database/geverich.db");
+
+define("BASE_URL","");
+
+?>

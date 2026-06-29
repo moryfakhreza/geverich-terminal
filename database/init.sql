@@ -1,23 +1,31 @@
-CREATE TABLE IF NOT EXISTS trades (
+CREATE TABLE trades (
 
 id INTEGER PRIMARY KEY AUTOINCREMENT,
 
-tanggal TEXT,
+tanggal TEXT NOT NULL,
 
-arah TEXT,
+pair TEXT NOT NULL,
 
-entry_price REAL,
+direction TEXT NOT NULL,
 
-sl_price REAL,
+entry_price REAL NOT NULL,
 
-tp_price REAL,
+sl REAL,
+
+tp REAL,
+
+exit_price REAL,
 
 lot REAL,
 
+profit_usd REAL DEFAULT 0,
+
 hasil TEXT,
 
-profit_usd REAL,
+emotion TEXT,
 
-created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+note TEXT,
+
+created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 
 );

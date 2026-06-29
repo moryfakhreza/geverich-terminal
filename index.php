@@ -3,109 +3,39 @@
 require_once 'includes/config.php';
 require_once 'includes/db.php';
 require_once 'includes/header.php';
-$db = getDB();
+require_once 'includes/navbar.php';
 
-$today = date('Y-m-d');
+$page = $_GET['page'] ?? 'dashboard';
 
-$stmt = $db->prepare("
-SELECT
-COUNT(*) total,
-SUM(CASE WHEN hasil='WIN' THEN 1 ELSE 0 END) wins,
-SUM(CASE WHEN hasil='LOSS' THEN 1 ELSE 0 END) losses,
-COALESCE(SUM(profit_usd),0) pnl
-FROM trades
-WHERE DATE(tanggal)=?
-");
+switch ($page) {
 
-$stmt->execute([$today]);
+    case 'journal':
+        require 'pages/journal.php';
+        break;
+    case 'journal-create':
+    require 'pages/journal-create.php';
+    break;
+    
+    case 'trade-view':
+    require 'pages/trade-view.php';
+    break;
+    
+    case 'trade-edit':
+    require 'pages/trade-edit.php';
+    break;
+    
 
-$stats = $stmt->fetch(PDO::FETCH_ASSOC);
+    case 'analytics':
+        require 'pages/analytics.php';
+        break;
 
-$totalTrades = $stats['total'] ?? 0;
-$wins = $stats['wins'] ?? 0;
-$pnl = $stats['pnl'] ?? 0;
+    case 'calculator':
+        require 'pages/calculator.php';
+        break;
 
-$winRate = $totalTrades
-? round(($wins/$totalTrades)*100)
-:0;
-?>
+    default:
+        require 'pages/dashboard.php';
+        break;
+}
 
-
-<header class="topbar">
-
-    <div class="logo">
-        GEVERICH TERMINAL
-    </div>
-
-    <div class="topbar-right">
-
-        <div id="todayDate"></div>
-
-        <div id="clock"></div>
-
-    </div>
-
-</header>
-
-<nav class="navbar">
-    <a href="#">Dashboard</a>
-    <a href="#">Journal</a>
-    <a href="#">Analytics</a>
-    <a href="#">Calculator</a>
-</nav>
-<?php require 'components/market-ticker.php'; ?>
-
-<?php require 'components/dashboard-stats.php'; ?>
-
-<main class="dashboard">
-
-    <section class="chart-card">
-
-        <div class="panel-title">
-            LIVE CHART
-        </div>
-
-<div class="panel-content chart-body">
-
-    <div id="tv_chart"></div>
-
-</div>
-
-    </section>
-
-    <aside class="sidebar">
-
-        <section class="card">
-            <div class="panel-title">Sessions</div>
-            <div class="panel-content">Sessions</div>
-        </section>
-
-        <section class="card">
-            <div class="panel-title">Risk Calculator</div>
-            <div class="panel-content">Calculator</div>
-        </section>
-
-        <section class="card">
-            <div class="panel-title">Checklist</div>
-            <div class="panel-content">Checklist</div>
-        </section>
-
-    </aside>
-
-</main>
-
-<section class="journal card">
-    <div class="panel-title">Journal Preview</div>
-    <div class="panel-content">Trade Journal</div>
-</section>
-
-<section class="analytics card">
-    <div class="panel-title">Analytics</div>
-    <div class="panel-content">Analytics</div>
-</section>
-
-<footer class="statusbar">
-    Ready
-</footer>
-
-<?php require_once 'includes/footer.php'; ?>
+require_once 'includes/footer.php';
