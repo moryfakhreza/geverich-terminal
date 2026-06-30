@@ -56,6 +56,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $labels = [];
 $equity = [];
+$hasEquityData = count($labels) > 0;
 
 $total = 0;
 
@@ -395,7 +396,9 @@ TOTAL TRADES
 </div>
 
 <div class="mini-widgets">
-  <div class="mini-card">
+<?php if($bestTrade): ?>
+
+<div class="mini-card">
 
     <div class="mini-title">
 
@@ -422,6 +425,28 @@ TOTAL TRADES
     </div>
 
 </div>
+
+<?php else: ?>
+
+<div class="mini-card">
+
+    <div class="mini-title">
+
+        🏆 BEST TRADE
+
+    </div>
+
+    <div class="mini-empty">
+
+        GT&gt; Waiting for trade data...
+
+    </div>
+
+</div>
+
+<?php endif; ?>
+
+<?php if($worstTrade): ?>
 
 <div class="mini-card">
 
@@ -450,6 +475,26 @@ TOTAL TRADES
     </div>
 
 </div>
+
+<?php else: ?>
+
+<div class="mini-card">
+
+    <div class="mini-title">
+
+        💥 WORST TRADE
+
+    </div>
+
+    <div class="mini-empty">
+
+        GT&gt; Waiting for trade data...
+
+    </div>
+
+</div>
+
+<?php endif; ?>
 
 <div class="mini-card">
 

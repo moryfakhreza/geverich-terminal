@@ -32,7 +32,7 @@
 
               "importanceFilter":"-1,0,1",
 
-              "currencyFilter":"USD,EUR,GBP,JPY,AUD,CAD,NZD,CHF"
+              "currencyFilter":"USD,EUR,GBP,JPY"
 
             }
 

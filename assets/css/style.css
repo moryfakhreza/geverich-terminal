@@ -954,10 +954,20 @@ margin:20px;
 
 }
 
-.tradingview-widget-container{
+.mini-empty{
 
-    width:100%;
+    display:flex;
 
-    min-height:700px;
+    justify-content:center;
+
+    align-items:center;
+
+    height:70px;
+
+    color:#777;
+
+    font-size:13px;
+
+    font-family:Consolas, monospace;
 
 }
