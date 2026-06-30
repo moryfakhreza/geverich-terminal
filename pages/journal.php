@@ -87,6 +87,12 @@ $trades = $stmt->fetchAll();
     <a href="?page=journal-create" class="btn btn-primary">
         + NEW TRADE
     </a>
+    
+   <a href="pages/export-csv.php" class="btn btn-secondary">
+
+📊 Export CSV
+
+</a>
 
     <form method="GET" class="journal-search">
 

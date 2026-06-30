@@ -23,6 +23,6 @@
 
 <a href="?page=analytics">Analytics</a>
 
-<a href="?page=calculator">Calculator</a>
+   <a href="?page=calendar">Calendar</a>
 
 </nav>

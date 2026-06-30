@@ -32,6 +32,14 @@ switch ($page) {
     case 'calculator':
         require 'pages/calculator.php';
         break;
+        
+    case 'calendar':
+    require 'pages/calendar.php';
+    break;
+    
+    case 'export-csv':
+    require 'pages/export-csv.php';
+    break;
 
     default:
         require 'pages/dashboard.php';
@@ -39,3 +47,4 @@ switch ($page) {
 }
 
 require_once 'includes/footer.php';
+
