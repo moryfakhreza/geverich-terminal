@@ -24,5 +24,6 @@
 <a href="?page=analytics">Analytics</a>
 
    <a href="?page=calendar">Calendar</a>
+   <a href="?page=news">News</a>
 
 </nav>

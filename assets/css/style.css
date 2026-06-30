@@ -971,3 +971,48 @@ margin:20px;
     font-family:Consolas, monospace;
 
 }
+
+.news-terminal {
+    font-family: Consolas, monospace;
+    color: #aaa;
+    padding: 10px;
+    line-height: 1.6;
+}
+
+.news-list {
+    list-style: none;
+    padding: 0;
+}
+
+.news-list li {
+    margin: 12px 0;
+    font-family: Consolas, monospace;
+    border-bottom: 1px solid #222;
+    padding-bottom: 8px;
+}
+
+.news-list a {
+    color: #d4af37;
+    text-decoration: none;
+}
+
+.news-list a:hover {
+    text-decoration: underline;
+}
+
+.news-time {
+    font-size: 11px;
+    color: #777;
+    margin-top: 3px;
+}
+.news-source {
+    color: #777;
+    font-size: 11px;
+    margin-right: 6px;
+}
+
+.news-impact {
+    margin-right: 6px;
+    color: #d4af37;
+}
+

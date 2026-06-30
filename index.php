@@ -42,6 +42,10 @@ switch ($page) {
     require 'pages/export-csv.php';
     break;
 
+    case 'news':
+    require 'pages/news.php';
+    break;
+
     default:
         require 'pages/dashboard.php';
         break;

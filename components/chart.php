@@ -8,7 +8,6 @@
             <div class="panel-title">
                 LIVE CHART
             </div>
-
             <div class="chart-body">
                 <div id="tv_chart"></div>
             </div>
