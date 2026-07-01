@@ -154,38 +154,7 @@ $marketStatus = $isWeekend ? "CLOSED" : "OPEN";
             </strong>
         </div>
 
-        <!-- COUNTDOWN -->
-        <div class="session-footer">
-            <div>Countdown</div>
-            <strong id="countdown">
-                <?= sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds) ?>
-            </strong>
-        </div>
 
     </div>
 
 </div>
-<script>
-    const nextTime = <?= $nextTime * 1000 ?>;
-
-    function updateCountdown() {
-
-        const now = new Date().getTime();
-        const diff = nextTime - now;
-
-        if (diff <= 0) {
-            document.getElementById("countdown").innerText = "00:00:00";
-            return;
-        }
-
-        const h = Math.floor(diff / (1000 * 60 * 60));
-        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const s = Math.floor((diff % (1000 * 60)) / 1000);
-
-        document.getElementById("countdown").innerText =
-            `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-    }
-
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-</script>
