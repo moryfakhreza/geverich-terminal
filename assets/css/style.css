@@ -1016,3 +1016,203 @@ margin:20px;
     color: #d4af37;
 }
 
+.heatmap-container {
+    background: var(--bg-panel);
+    padding: 18px;
+    border-radius: 12px;
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+/* HEADER */
+.heat-header h2 {
+    margin: 0;
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+.heat-header p {
+    margin: 5px 0 15px;
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+/* SUMMARY */
+.heat-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.heat-summary .card {
+    background: var(--bg-card);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.heat-summary .label {
+    font-size: 10px;
+    color: var(--text-muted);
+}
+
+.heat-summary .value {
+    font-size: 13px;
+}
+
+/* GRID */
+.day-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+}
+
+/* BOX */
+.day-box {
+    background: var(--bg-card);
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid var(--border);
+}
+
+/* TEXT */
+.day-name {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.day-value {
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+/* DUAL BAR */
+.dual-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 8px;
+    margin: 8px 0;
+    position: relative;
+}
+
+/* LEFT SIDE */
+.bar.negative {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* RIGHT SIDE */
+.bar.positive {
+    flex: 1;
+    display: flex;
+}
+
+/* CENTER LINE */
+.center-line {
+    width: 2px;
+    height: 10px;
+    background: var(--border);
+    position: absolute;
+}
+
+/* FILL */
+.fill {
+    height: 6px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+/* COLORS */
+.fill.red {
+    background: linear-gradient(90deg, #6b1f1f, #ff4d4d);
+}
+
+.fill.gold {
+    background: linear-gradient(90deg, var(--gold), #ffe08a);
+}
+
+/* =========================
+   RISK ENGINE DESIGN
+========================= */
+
+.risk-container {
+    background: var(--bg-panel);
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    margin-bottom: 15px;
+    color: var(--text);
+}
+
+.risk-title {
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--text);
+}
+
+/* GRID */
+.risk-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.risk-box {
+    background: var(--bg-card);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.risk-box .label {
+    font-size: 10px;
+    color: var(--text-muted);
+}
+
+.risk-box .value {
+    font-size: 13px;
+    margin-top: 3px;
+}
+
+/* STATUS */
+.risk-status {
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.risk-status.safe {
+    background: #0f2a1f;
+    color: #00c896;
+}
+
+.risk-status.warning {
+    background: #2a2410;
+    color: #ffcc00;
+}
+
+.risk-status.danger {
+    background: #2a1010;
+    color: #ff4d4d;
+}
+
+/* BAR */
+.risk-bar {
+    height: 6px;
+    background: var(--bg);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.risk-bar .fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff4d4d, #ff8a8a);
+}

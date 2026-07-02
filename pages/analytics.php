@@ -246,7 +246,7 @@ TOTAL TRADES
 
     <div class="panel-content">
 
-       <canvas id="equityChart"height="100"></canvas>
+       <canvas id="equityChart"height="87"></canvas>
 
     </div>
 

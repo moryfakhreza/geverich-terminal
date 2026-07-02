@@ -132,8 +132,6 @@ $<?= number_format($profit,2) ?>
 
         <?php require __DIR__.'/sessions.php'; ?>
         <?php require __DIR__.'/risk-calculator.php'; ?>
-        <?php require __DIR__.'/checklist.php'; ?>
-
     </aside>
 
 </div>

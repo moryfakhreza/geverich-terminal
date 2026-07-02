@@ -46,6 +46,10 @@ switch ($page) {
     require 'pages/news.php';
     break;
 
+    case 'heatmap':
+        require "pages/heatmap.php";
+        break;
+
     default:
         require 'pages/dashboard.php';
         break;

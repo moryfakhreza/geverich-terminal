@@ -17,13 +17,14 @@
 
 <nav class="navbar">
 
-<a href="?page=dashboard">Dashboard</a>
+    <a href="?page=dashboard">Dashboard</a>
 
-<a href="?page=journal">Journal</a>
+    <a href="?page=journal">Journal</a>
 
-<a href="?page=analytics">Analytics</a>
+    <a href="?page=analytics">Analytics</a>
 
-   <a href="?page=calendar">Calendar</a>
-   <a href="?page=news">News</a>
+    <a href="?page=calendar">Calendar</a>
+    <a href="?page=news">News</a>
+    <a href="?page=heatmap">Heatmap</a>
 
 </nav>
