@@ -26,5 +26,12 @@
     <a href="?page=calendar">Calendar</a>
     <a href="?page=news">News</a>
     <a href="?page=heatmap">Heatmap</a>
+    <?php if (isLoggedIn()): ?>
+
+        <a href="index.php?page=logout" class="nav-logout">
+            Logout
+        </a>
+
+    <?php endif; ?>
 
 </nav>

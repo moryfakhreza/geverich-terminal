@@ -5,7 +5,7 @@ $db = getDB();
 // RISK ENGINE CORE
 // =========================
 
-$balance = 1000;
+$balance = $_SESSION['balance'];
 $maxDailyLoss = 100;
 $maxTrades = 8;
 $riskPerTradePercent = 2;

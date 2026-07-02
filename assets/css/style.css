@@ -1,3 +1,15 @@
+
+html,
+body {
+    height: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    background: radial-gradient(circle at top, #111 0%, #0d0d0d 60%);
+    color: var(--text);
+}
 /* =========================
    VARIABLES
 ========================= */
@@ -17,6 +29,7 @@
     --text:#ffffff;
 
     --text-muted:#9b9b9b;
+    --gold-glow: rgba(212, 175, 55, 0.25);
 
 }
 
@@ -59,6 +72,7 @@ body{
     font-weight:bold;
     color:var(--gold);
     letter-spacing:2px;
+    text-shadow: 0 0 12px var(--gold-glow);
 }
 
 .topbar-right{
@@ -92,7 +106,30 @@ body{
     color:var(--text);
     text-decoration:none;
     font-size:14px;
+    position: relative;
+        opacity: 0.85;
+        transition: 0.2s;
 
+}
+
+.navbar a:hover {
+    opacity: 1;
+    color: var(--gold);
+}
+
+.navbar a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0%;
+    height: 2px;
+    background: var(--gold);
+    transition: 0.2s;
+}
+
+.navbar a:hover::after {
+    width: 100%;
 }
 
 /* =========================
@@ -157,7 +194,7 @@ body{
 
     display:grid;
     grid-template-columns:1fr 320px;
-    gap:20px;
+    gap:24px;
     margin:15px;
 
 }
@@ -210,7 +247,9 @@ body{
     border-bottom:1px solid var(--border);
     color:var(--gold);
     font-weight:bold;
-    font-size:13px;
+    font-size:12px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    letter-spacing: 1.2px;
 
 }
 
@@ -1140,12 +1179,14 @@ margin:20px;
 ========================= */
 
 .risk-container {
-    background: var(--bg-panel);
+    background: linear-gradient(180deg, #151515, #121212);
     padding: 16px;
     border-radius: 12px;
-    border: 1px solid var(--border);
+    border: 1px solid rgba(212, 175, 55, 0.15);
     margin-bottom: 15px;
     color: var(--text);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+        transition: 0.2s ease;
 }
 
 .risk-title {
@@ -1153,6 +1194,8 @@ margin:20px;
     font-weight: bold;
     margin-bottom: 10px;
     color: var(--text);
+    letter-spacing: 1px;
+        text-transform: uppercase;
 }
 
 /* GRID */
@@ -1178,6 +1221,7 @@ margin:20px;
 .risk-box .value {
     font-size: 13px;
     margin-top: 3px;
+    letter-spacing: 0.3px;
 }
 
 /* STATUS */
@@ -1192,16 +1236,19 @@ margin:20px;
 .risk-status.safe {
     background: #0f2a1f;
     color: #00c896;
+    box-shadow: 0 0 10px rgba(0, 200, 150, 0.15);
 }
 
 .risk-status.warning {
     background: #2a2410;
     color: #ffcc00;
+    box-shadow: 0 0 10px rgba(255, 204, 0, 0.12);
 }
 
 .risk-status.danger {
     background: #2a1010;
     color: #ff4d4d;
+    box-shadow: 0 0 10px rgba(255, 77, 77, 0.12);
 }
 
 /* BAR */
@@ -1215,4 +1262,91 @@ margin:20px;
 .risk-bar .fill {
     height: 100%;
     background: linear-gradient(90deg, #ff4d4d, #ff8a8a);
+}
+
+.auth-wrapper {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at top, #151515, #0d0d0d);
+}
+
+.auth-box {
+    width: 360px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.auth-title {
+    font-size: 18px;
+    color: var(--gold);
+    margin-bottom: 20px;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+.auth-input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    background: #111;
+    border: 1px solid #2a2a2a;
+    color: #fff;
+    border-radius: 8px;
+    outline: none;
+    transition: 0.2s;
+}
+
+.auth-input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.2);
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--gold);
+    border: none;
+    border-radius: 8px;
+    color: #111;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.auth-btn:hover {
+    background: #f0c94c;
+}
+
+.auth-link {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.auth-link a {
+    color: var(--gold);
+    text-decoration: none;
+}
+
+.nav-logout {
+    margin-left: auto;
+    padding: 6px 12px;
+    background: #2a1010;
+    border: 1px solid #4a1c1c;
+    color: #ff4d4d;
+    border-radius: 6px;
+    font-size: 13px;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.nav-logout:hover {
+    background: #4a1c1c;
+    color: #fff;
 }
