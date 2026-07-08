@@ -1,4 +1,5 @@
 <?php
+
 require_once 'includes/config.php';
 require_once 'includes/db.php';
 require_once 'includes/auth.php';
@@ -6,28 +7,48 @@ require_once 'includes/auth.php';
 $page = $_GET['page'] ?? 'dashboard';
 
 // =========================
-// PUBLIC PAGES (NO LOGIN REQUIRED)
+// PUBLIC PAGES
 // =========================
 
 $publicPages = ['login', 'register'];
 
-if (!in_array($page, $publicPages)) {
-    if (!isLoggedIn()) {
-        header("Location: index.php?page=login");
-        exit;
-    }
+// Cek login
+if (!in_array($page, $publicPages) && !isLoggedIn()) {
+    header("Location: index.php?page=login");
+    exit;
 }
+
+// =========================
+// LOGIN & REGISTER
+// =========================
+
+if ($page === 'login') {
+    require 'pages/login.php';
+    exit;
+}
+
+if ($page === 'register') {
+    require 'pages/register.php';
+    exit;
+}
+
+// =========================
+// DASHBOARD LAYOUT
+// =========================
+
 require_once 'includes/header.php';
 require_once 'includes/navbar.php';
 require_once 'includes/market-ticker.php';
-
-
 
 // =========================
 // ROUTER
 // =========================
 
 switch ($page) {
+
+    case 'dashboard':
+        require 'pages/dashboard.php';
+        break;
 
     case 'journal':
         require 'pages/journal.php';
@@ -66,15 +87,11 @@ switch ($page) {
         break;
 
     case 'heatmap':
-        require "pages/heatmap.php";
+        require 'pages/heatmap.php';
         break;
 
-    case 'login':
-        require 'pages/login.php';
-        break;
-
-    case 'register':
-        require 'pages/register.php';
+    case 'ai':
+        require 'pages/ai.php';
         break;
 
     case 'logout':
@@ -85,5 +102,9 @@ switch ($page) {
         require 'pages/dashboard.php';
         break;
 }
+
+// =========================
+// FOOTER
+// =========================
 
 require_once 'includes/footer.php';

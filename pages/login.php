@@ -1,15 +1,18 @@
 <?php
+
 require_once 'includes/db.php';
 require_once 'includes/auth.php';
-$db=getDB();
+
+$db = getDB();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $username = $_POST['username'];
+    $username = trim($_POST['username']);
     $password = $_POST['password'];
 
-    $stmt = $db->prepare("SELECT * FROM users WHERE username = ?");
+    $stmt = $db->prepare("SELECT * FROM users WHERE username=?");
     $stmt->execute([$username]);
+
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($user && password_verify($password, $user['password'])) {
@@ -22,8 +25,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    $error = "Invalid login";
+    $error = "Username atau password salah.";
 }
+
+require_once 'includes/auth-header.php';
 ?>
 
 <div class="auth-wrapper">
@@ -48,3 +53,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
 </div>
+<?php require_once 'includes/auth-footer.php'; ?>

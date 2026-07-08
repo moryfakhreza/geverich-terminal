@@ -3,6 +3,7 @@
 $mode = "create";
 
 $trade = [
+    'user_id' => $_SESSION['user_id'],
 
     "tanggal" => date("Y-m-d"),
 

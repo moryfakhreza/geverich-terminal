@@ -1,25 +1,29 @@
 <?php
 
-$db=getDB();
+$db = getDB();
 
-$id=$_GET['id'] ?? 0;
+$id = $_GET['id'] ?? 0;
 
-$stmt=$db->prepare("
+$stmt = $db->prepare("
 SELECT *
 FROM trades
-WHERE id=?
+WHERE id = ?
 ");
 
 $stmt->execute([$id]);
 
-$trade=$stmt->fetch();
+$trade = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if(!$trade){
-
+if (!$trade) {
     die("Trade tidak ditemukan.");
-
 }
 
+$profitClass = $trade['profit_usd'] >= 0 ? "profit" : "loss";
+$resultColor = match ($trade['hasil']) {
+    "WIN" => "#27ae60",
+    "LOSS" => "#e74c3c",
+    default => "#f1c40f"
+};
 ?>
 
 <div class="card">
@@ -30,26 +34,41 @@ if(!$trade){
 
     <div class="panel-content">
 
+        <h3>GENERAL</h3>
+
         <table class="detail-table">
 
             <tr>
                 <td>Date</td>
-                <td><?= $trade['tanggal'] ?></td>
+                <td><?= htmlspecialchars($trade['tanggal']) ?></td>
             </tr>
 
             <tr>
                 <td>Pair</td>
-                <td><?= $trade['pair'] ?></td>
+                <td><?= htmlspecialchars($trade['pair']) ?></td>
             </tr>
 
             <tr>
                 <td>Direction</td>
-                <td><?= $trade['direction'] ?></td>
+                <td><?= htmlspecialchars($trade['direction']) ?></td>
+            </tr>
+
+        </table>
+
+        <hr>
+
+        <h3>PRICE</h3>
+
+        <table class="detail-table">
+
+            <tr>
+                <td>Entry</td>
+                <td><?= $trade['entry_price'] ?></td>
             </tr>
 
             <tr>
-                <td>Entry Price</td>
-                <td><?= $trade['entry_price'] ?></td>
+                <td>Exit</td>
+                <td><?= $trade['exit_price'] ?></td>
             </tr>
 
             <tr>
@@ -62,10 +81,13 @@ if(!$trade){
                 <td><?= $trade['tp'] ?></td>
             </tr>
 
-            <tr>
-                <td>Exit Price</td>
-                <td><?= $trade['exit_price'] ?></td>
-            </tr>
+        </table>
+
+        <hr>
+
+        <h3>PERFORMANCE</h3>
+
+        <table class="detail-table">
 
             <tr>
                 <td>Lot</td>
@@ -73,31 +95,68 @@ if(!$trade){
             </tr>
 
             <tr>
+                <td>Risk Reward</td>
+                <td><?= number_format((float)$trade['rr'],2) ?> R</td>
+            </tr>
+
+            <tr>
                 <td>Profit</td>
-                <td>$<?= number_format((float)$trade['profit_usd'],2) ?></td>
+                <td class="<?= $profitClass ?>">
+                    $<?= number_format((float)$trade['profit_usd'],2) ?>
+                </td>
             </tr>
 
             <tr>
                 <td>Result</td>
-                <td><?= $trade['hasil'] ?></td>
-            </tr>
-
-            <tr>
-                <td>Emotion</td>
-                <td><?= $trade['emotion'] ?></td>
-            </tr>
-
-            <tr>
-                <td>Notes</td>
-                <td><?= nl2br(htmlspecialchars($trade['note'])) ?></td>
+                <td style="color:<?= $resultColor ?>;font-weight:bold;">
+                    <?= htmlspecialchars($trade['hasil']) ?>
+                </td>
             </tr>
 
         </table>
 
+        <hr>
+
+        <h3>PSYCHOLOGY</h3>
+
+        <table class="detail-table">
+
+            <tr>
+                <td>Emotion</td>
+                <td><?= htmlspecialchars($trade['emotion']) ?></td>
+            </tr>
+
+            <tr>
+                <td>Strategy</td>
+                <td><?= htmlspecialchars($trade['strategy'] ?? '-') ?></td>
+            </tr>
+
+        </table>
+
+        <hr>
+
+        <h3>NOTES</h3>
+
+        <div class="terminal-output">
+
+            <?= nl2br(htmlspecialchars($trade['note'])) ?>
+
+        </div>
+
+        <hr>
+
+        <h3>AI REVIEW</h3>
+
+        <div class="terminal-output">
+
+            GT&gt; AI Review akan tersedia pada update berikutnya.
+
+        </div>
+
         <br>
 
         <a href="?page=journal" class="btn btn-primary">
-            ← Back
+            ← Back to Journal
         </a>
 
     </div>

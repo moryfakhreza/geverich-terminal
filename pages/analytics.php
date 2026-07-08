@@ -1,7 +1,10 @@
 <?php
+                    require_once 'includes/auth.php';
+                    requireLogin();
 
-$db = getDB();
+                    $db = getDB();
 
+                    $userId = $_SESSION['user_id'];
 $sql = "
 
 SELECT
@@ -19,10 +22,17 @@ SUM(CASE WHEN profit_usd<0 THEN ABS(profit_usd) ELSE 0 END) totalLoss,
 SUM(profit_usd) netProfit
 
 FROM trades
+WHERE user_id = ?
 
 ";
 
-$stats = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+                    $stmt = $db->prepare($sql);
+
+                    $stmt->execute([
+                        $userId
+                    ]);
+
+                    $stats = $stmt->fetch(PDO::FETCH_ASSOC);
 
 $totalTrades = (int)$stats['totalTrades'];
 
@@ -44,13 +54,18 @@ $profitFactor = $totalLoss>0
 ? round($totalProfit/$totalLoss,2)
 :0;
 
-$stmt = $db->query("
+                    $stmt = $db->prepare("
 SELECT
 tanggal,
 profit_usd
 FROM trades
+WHERE user_id = ?
 ORDER BY tanggal ASC, id ASC
 ");
+
+                    $stmt->execute([
+                        $userId
+                    ]);
 
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -68,7 +83,7 @@ foreach($rows as $row){
 
     $equity[] = $total;
 }
-$pairStats = $db->query("
+                    $stmt = $db->prepare("
 
 SELECT
 
@@ -82,13 +97,22 @@ SUM(profit_usd) net_profit
 
 FROM trades
 
+WHERE user_id = ?
+
 GROUP BY pair
 
 ORDER BY net_profit DESC
 
-")->fetchAll(PDO::FETCH_ASSOC);
+");
 
-$emotionStats = $db->query("
+
+                    $stmt->execute([
+                        $userId
+                    ]);
+
+                    $pairStats = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                    $stmt = $db->prepare("
 
 SELECT
 
@@ -102,33 +126,63 @@ SUM(profit_usd) net_profit
 
 FROM trades
 
-WHERE emotion IS NOT NULL
+WHERE user_id = ?
+
+AND emotion IS NOT NULL
+
 AND emotion <> ''
 
 GROUP BY emotion
 
 ORDER BY net_profit DESC
 
-")->fetchAll(PDO::FETCH_ASSOC);
+");
 
-$bestTrade = $db->query("
+
+                    $stmt->execute([
+                        $userId
+                    ]);
+
+                    $emotionStats = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    $stmt = $db->prepare("
 SELECT *
 FROM trades
+WHERE user_id = ?
 ORDER BY profit_usd DESC
 LIMIT 1
-")->fetch(PDO::FETCH_ASSOC);
+");
 
-$worstTrade = $db->query("
+                    $stmt->execute([
+                        $userId
+                    ]);
+
+                    $bestTrade = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                    $stmt = $db->prepare("
 SELECT *
 FROM trades
+WHERE user_id = ?
 ORDER BY profit_usd ASC
 LIMIT 1
-")->fetch(PDO::FETCH_ASSOC);
+");
 
-$avgProfit = $db->query("
+                    $stmt->execute([
+                        $userId
+                    ]);
+
+                    $worstTrade = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                    $stmt = $db->prepare("
 SELECT AVG(profit_usd) AS avg_profit
 FROM trades
-")->fetch(PDO::FETCH_ASSOC);
+WHERE user_id = ?
+");
+
+                    $stmt->execute([
+                        $userId
+                    ]);
+
+                    $avgProfit = $stmt->fetch(PDO::FETCH_ASSOC);
 
 ?>
 

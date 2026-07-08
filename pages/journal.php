@@ -1,4 +1,8 @@
 <?php
+            require_once 'includes/auth.php';
+            requireLogin();
+
+            $userId = $_SESSION['user_id'];
 $db = getDB();
 
 $direction = $_GET['direction'] ?? '';
@@ -7,8 +11,8 @@ $emotion   = $_GET['emotion'] ?? '';
 $search = trim($_GET['search'] ?? '');
 $pair   = $_GET['pair'] ?? '';
 
-$sql = "SELECT * FROM trades WHERE 1=1";
-$params = [];
+            $sql = "SELECT * FROM trades WHERE user_id = ?";
+            $params = [$userId];
 
 /* SEARCH */
 if($search != ''){

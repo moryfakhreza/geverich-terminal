@@ -1,12 +1,25 @@
 <?php
 
+require_once 'includes/auth.php';
+requireLogin();
+
 $db = getDB();
 
-$trades = $db->query("
-    SELECT profit_usd, tanggal
-    FROM trades
-")->fetchAll();
+$userId = $_SESSION['user_id'];
 
+        $stmt = $db->prepare("
+    SELECT 
+        profit_usd,
+        tanggal
+    FROM trades
+    WHERE user_id = ?
+");
+
+        $stmt->execute([
+            $userId
+        ]);
+
+        $trades = $stmt->fetchAll(PDO::FETCH_ASSOC);
 /* =========================
    DAILY MAP
 ========================= */
@@ -35,13 +48,21 @@ foreach ($trades as $t) {
     }
 }
 
-/* =========================
+        /* =========================
    BEST / WORST
 ========================= */
 
-$bestDay = array_keys($dayMap, max($dayMap))[0];
-$worstDay = array_keys($dayMap, min($dayMap))[0];
+        $hasTrade = count($trades) > 0;
 
+        if ($hasTrade) {
+
+            $bestDay = array_keys($dayMap, max($dayMap))[0];
+            $worstDay = array_keys($dayMap, min($dayMap))[0];
+        } else {
+
+            $bestDay = "-";
+            $worstDay = "-";
+        }
 /* =========================
    DUAL SCALE (POSITIVE / NEGATIVE)
 ========================= */

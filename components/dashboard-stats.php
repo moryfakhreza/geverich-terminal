@@ -1,21 +1,29 @@
 <?php
 
+require_once 'includes/auth.php';
+requireLogin();
+
 $db = getDB();
 
+$userId = $_SESSION['user_id'];
 $today = date('Y-m-d');
 
 $stmt = $db->prepare("
 SELECT
-COUNT(*) total,
-SUM(CASE WHEN hasil='WIN' THEN 1 ELSE 0 END) wins,
-SUM(CASE WHEN hasil='LOSS' THEN 1 ELSE 0 END) losses,
-SUM(CASE WHEN hasil='BE' THEN 1 ELSE 0 END) bes,
-COALESCE(SUM(profit_usd),0) pnl
+    COUNT(*) total,
+    SUM(CASE WHEN hasil='WIN' THEN 1 ELSE 0 END) wins,
+    SUM(CASE WHEN hasil='LOSS' THEN 1 ELSE 0 END) losses,
+    SUM(CASE WHEN hasil='BE' THEN 1 ELSE 0 END) bes,
+    COALESCE(SUM(profit_usd),0) pnl
 FROM trades
-WHERE DATE(tanggal)=?
+WHERE user_id = ?
+AND DATE(tanggal) = ?
 ");
 
-$stmt->execute([$today]);
+$stmt->execute([
+    $userId,
+    $today
+]);
 
 $stats = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -26,9 +34,8 @@ $bes = $stats['bes'] ?? 0;
 $pnl = $stats['pnl'] ?? 0;
 
 $winRate = $totalTrades > 0
-? round(($wins / $totalTrades) * 100)
-: 0;
-
+    ? round(($wins / $totalTrades) * 100)
+    : 0;
 ?>
 
 <div class="dashboard-stats">
@@ -36,7 +43,7 @@ $winRate = $totalTrades > 0
     <div class="stat-card">
         <div class="stat-title">Today's P/L</div>
         <div class="stat-value <?= $pnl >= 0 ? 'profit' : 'loss' ?>">
-            <?= $pnl >= 0 ? '+' : '' ?>$<?= number_format($pnl,2) ?>
+            <?= $pnl >= 0 ? '+' : '' ?>$<?= number_format($pnl, 2) ?>
         </div>
     </div>
 

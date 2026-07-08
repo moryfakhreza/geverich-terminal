@@ -23,15 +23,24 @@
     <div class="panel-content">
 
         <?php
+        require_once 'includes/auth.php';
+        requireLogin();
 
         $db = getDB();
 
-        $trades = $db->query("
-        SELECT *
-        FROM trades
-        ORDER BY id DESC
-        LIMIT 5
-        ")->fetchAll();
+        $userId = $_SESSION['user_id'];
+
+        $stmt = $db->prepare("
+    SELECT *
+    FROM trades
+    WHERE user_id = ?
+    ORDER BY id DESC
+    LIMIT 5
+");
+
+        $stmt->execute([$userId]);
+
+        $trades = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         ?>
 

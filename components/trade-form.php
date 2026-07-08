@@ -204,11 +204,16 @@ value="<?= $h ?>"
 <?php
 
 $list=[
-"Confident",
 "Calm",
+"Confident",
+"Neutral",
 "Fear",
+"FOMO",
+"Revenge Trade",
 "Greedy",
-"FOMO"
+"Frustrated",
+"Overconfident",
+"Tired"
 ];
 
 foreach($list as $e):
@@ -220,6 +225,45 @@ value="<?= $e ?>"
 <?= $trade['emotion']==$e ? "selected":"" ?>>
 
 <?= $e ?>
+
+</option>
+
+<?php endforeach; ?>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Strategy</label>
+
+<select name="strategy">
+
+<?php
+
+$list=[
+"Price Action",
+"SMC",
+"ICT",
+"Breakout",
+"Trend Following",
+"Support & Resistance",
+"Supply & Demand",
+"Scalping",
+"Swing",
+"News Trading"
+];
+
+foreach($list as $s):
+
+?>
+
+<option
+value="<?= $s ?>"
+<?= ($trade['strategy'] ?? 'Price Action')==$s ? 'selected' : '' ?>>
+
+<?= $s ?>
 
 </option>
 

@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
+<link rel="stylesheet" href="assets/css/style.css">
 <div class="auth-wrapper">
 
     <div class="auth-box">

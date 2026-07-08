@@ -1350,3 +1350,280 @@ margin:20px;
     background: #4a1c1c;
     color: #fff;
 }
+
+/* =========================
+   AI TERMINAL UI
+========================= */
+
+.ai-terminal {
+    display: flex;
+    flex-direction: column;
+    height: 75vh;
+        /* lebih stabil dari calc */
+    margin: 20px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* OUTPUT AREA */
+.ai-output {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    background: #0b0b0b;
+    scroll-behavior: smooth;
+    height: 100%;
+}
+
+.ai-response {
+    font-family: Consolas, monospace;
+    font-size: 13px;
+    color: #cfcfcf;
+    white-space: pre-wrap;
+    line-height: 1.6;
+    margin-top: 10px;
+    
+}
+
+/* INPUT BAR (BOTTOM FIXED STYLE) */
+.ai-input-bar {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    border-top: 1px solid var(--border);
+    background: var(--bg-card);
+}
+
+.ai-input-bar textarea {
+    flex: 1;
+    resize: none;
+    height: 50px;
+    padding: 10px;
+    background: #111;
+    border: 1px solid #333;
+    color: #fff;
+    border-radius: 8px;
+    font-family: Consolas, monospace;
+    font-size: 10px;
+}
+
+.ai-input-bar button {
+    width: 120px;
+    background: var(--gold);
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.ai-input-bar button:hover {
+    background: #f0c94c;
+}
+/* =========================
+   TERMINAL OUTPUT STYLE
+========================= */
+
+.ai-response {
+    font-family: Consolas, monospace;
+    color: #cfcfcf;
+    font-size: 13px;
+}
+
+/* BLOCK */
+.terminal-block {
+    padding: 10px;
+    border-left: 3px solid var(--gold);
+    background: #0b0b0b;
+    border-radius: 6px;
+}
+
+/* PREFIX LINE */
+.terminal-line {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.gt {
+    color: var(--gold);
+    font-weight: bold;
+}
+
+.cmd {
+    color: #aaa;
+}
+
+/* OUTPUT TEXT */
+.terminal-output {
+    white-space: pre-wrap;
+    line-height: 1.6;
+    color: #ddd;
+}
+
+/* EMPTY STATE */
+.terminal-empty {
+    color: #666;
+    font-family: Consolas, monospace;
+    font-size: 12px;
+}
+
+.chat-bubble {
+    max-width: 65%;
+    padding: 8px 10px;
+    margin: 6px 0;
+    border-radius: 10px;
+    font-family: Consolas, monospace;
+    font-size: 12px;
+    line-height: 1.4;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    word-break: break-word;
+}
+
+/* ROLE */
+.chat-bubble .role {
+    font-size: 9px;
+    opacity: 0.5;
+    line-height: 1;
+    margin: 0;
+}
+
+/* TEXT FIX (INI PENTING) */
+.chat-bubble .text {
+    font-size: 12px;
+    line-height: 1.4;
+    white-space: pre-wrap;
+    margin: 0;
+}
+
+/* USER */
+.chat-bubble.user {
+    margin-left: auto;
+    background: #1b1f2a;
+    border: 1px solid #2c3446;
+    color: #fff;
+}
+
+/* AI */
+.chat-bubble.ai {
+    margin-right: auto;
+    background: #0c0c0c;
+    border: 1px solid #2a2a2a;
+    color: #d0d0d0;
+}
+
+/* CHAT CONTAINER */
+.ai-response {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px 0;
+}
+
+/* ==========================
+   AI HEADER
+========================== */
+
+.ai-header{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:16px 20px;
+
+    border-bottom:1px solid var(--border);
+
+    background:#111;
+
+}
+
+.ai-title{
+
+    color:var(--gold);
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+
+}
+
+.ai-subtitle{
+
+    margin-top:4px;
+
+    font-size:11px;
+
+    color:#888;
+
+}
+
+.ai-status{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    font-size:12px;
+
+    color:#4caf50;
+
+    font-weight:bold;
+
+}
+
+.status-dot{
+
+    width:10px;
+
+    height:10px;
+
+    border-radius:50%;
+
+    background:#4caf50;
+
+    box-shadow:0 0 10px #4caf50;
+
+}
+
+.ai-status.thinking {
+
+    color: #d4af37;
+
+}
+
+
+.ai-status.thinking .status-dot {
+
+    background: #d4af37;
+
+    box-shadow: 0 0 10px #d4af37;
+
+    animation: pulseAI 1s infinite;
+
+}
+
+
+@keyframes pulseAI {
+
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .3;
+    }
+
+    100% {
+        opacity: 1;
+    }
+
+}
